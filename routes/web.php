@@ -5,7 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 
 //Affichage des produits
-Route::get('/', [ProductController::class, 'index'])->name('home');
+Route::get('/', [ProductController::class, 'index'])->name('product');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.detail');
 Route::get('/product/category/{id}', [ProductController::class, 'productByCategory'])->name('product.category');
 

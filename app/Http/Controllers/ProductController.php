@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -13,7 +15,11 @@ class ProductController extends Controller
 
     public function index()
     {
-        return 'home';
+        $categories = Category::all();
+        
+        $products=Product::orderBy('id', 'desc')->paginate(10);
+        
+        return view('product.products',compact('categories', 'products'));
     }
     //
     /***
@@ -23,7 +29,7 @@ class ProductController extends Controller
 
     public function productByCategory () 
     {
-        return 'Product By Category';
+        return view ('product.products');
     }
 
 /***
@@ -31,7 +37,9 @@ class ProductController extends Controller
  */
     public function show()
     {
-        return  'detail';
+        
+        return  view ('product.show');
+        
     }
 
 }
