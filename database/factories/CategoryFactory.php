@@ -16,10 +16,10 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake()->words(7,true);
+        $name = fake()->word();
         return [
             //
-            'name'=>fake()->word(7,true) ,
+            'name'=>$name ,
             'image' => fake()->imageUrl(640, 480, $name, true),
         ];
     }
