@@ -17,7 +17,8 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         
-        $products=Product::orderBy('id', 'desc')->paginate(10);
+        //requête pour filtré à partir d'une catégorie
+        $products=Product::orderBy('id', 'desc')->paginate(8);
         
         return view('product.products',compact('categories', 'products'));
     }
@@ -27,18 +28,35 @@ class ProductController extends Controller
      * **
      */
 
-    public function productByCategory () 
+    public function productByCategory ($id = 0) 
     {
-        return view ('product.products');
+        $categories = Category::all();
+
+        $products=Product::where('category_id', $id)
+        ->orderBy('id', 'desc')
+        ->paginate(10);
+        
+        return view('product.products',compact('categories', 'products'));
+    
     }
 
 /***
  * *Detail show product detail
  */
-    public function show()
+    public function show(Product $product)
     {
         
-        return  view ('product.show');
+        //$product = Product::findOrFail();
+        //requete produit similaires 
+        $products = Product::where('category_id', $product->category_id)
+        ->inRandomOrder()
+        ->limit(5)
+        ->get();
+
+
+        
+        return  view ('product.show',compact('product', 'products'));
+        
         
     }
 
