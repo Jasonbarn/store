@@ -2,22 +2,23 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
-use App\Models\User;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\User;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\UserResource\RelationManagers;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
 
     public static function form(Form $form): Form
     {
@@ -25,19 +26,23 @@ class UserResource extends Resource
             ->schema([
                 //
                 Forms\Components\TextInput::make('name')
-                ->required()
-                ->maxLength(255),
+                ->required(),
             Forms\Components\TextInput::make('email')
                 ->email()
-                ->required()
-                ->maxLength(255),
-            Forms\Components\Select::make('is_admin')
-                ->options([
-                    0 => 'User',
-                    1 => 'Admin',
-                ])
-                ->label('Role')
                 ->required(),
+
+                //For remember passwords and manage for password
+                Forms\Components\TextInput::make('password')
+            ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+            ->dehydrated(fn ($state) => filled($state))
+            ->required(fn (string $context): bool => $context === 'create'),
+
+            Forms\Components\Select::make('role')
+                ->options([
+                    'user' => 'Client',
+                    'admin' => 'Administrateur',
+                ])->required(),
+                
             ]);
     }
 
@@ -46,15 +51,24 @@ class UserResource extends Resource
         return $table
             ->columns([
                 //
-                Tables\Columns\TextColumn::make('id')->sortable(),
-                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('is_admin')
-                    ->label('Role'),
+                Tables\Columns\TextColumn::make('id')->label('Nom')->sortable(),//sert  pour classer les champs en ordre decroissant et croissant
+                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),//searchable() sers a rechercher 
+                Tables\Columns\TextColumn::make('email')->label('Adresse email')//label pour changer le nom
+                ->icon('heroicon-o-at-symbol')//pour choisir un icons heroicon-nom(solid,outline,mini,micro) et le nm de icon qu'on veut
+                ->sortable()->searchable(),
+                Tables\Columns\SelectColumn::make('role'),
                 Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
             ])
             ->filters([
-                //
+                // filtre pour les roles en fonction du role client ou administratuer
+                Tables\Filters\SelectFilter::make('Role')
+        ->options([
+        'user' => 'Client',
+        'admin' => 'Administrateur',
+
+        
+    ])
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -81,4 +95,6 @@ class UserResource extends Resource
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
+
+    
 }

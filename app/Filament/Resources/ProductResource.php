@@ -27,12 +27,21 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('category_id')
-                ->relationship('category', 'name')
+            
+                Forms\Components\TextInput::make('name')->label('Nom')->required(),
+                Forms\Components\Textarea::make('description'),
+            Forms\Components\TextInput::make('price')
+            ->label('Prix')
                 ->required(),
-            TextInput::make('name')->required()->maxLength(50),
-            Textarea::make('description')->maxLength(65535),
-            TextInput::make('price')->required()->numeric(),
+
+                // relations entre la table categorie et product sa categorie et son nom
+                Forms\Components\Select::make('category')
+                ->label('Categorie')
+                ->relationship(name: 'category', titleAttribute: 'name')
+                ->required(),
+                Forms\Components\FileUpload::make('images')->multiple()
+                ,
+            
             ]);
     }
 
@@ -41,18 +50,22 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 //
-                TextColumn::make('category.name')->label('Category'),
-                TextColumn::make('name')->searchable(),
-                TextColumn::make('description')->limit(50),
-                TextColumn::make('price')->money('eur')->sortable(),
-                TextColumn::make('created_at')->dateTime()->sortable()
+                Tables\Columns\ImageColumn::make('image')
+                ->circular()
+                ->stacked(),
+                Tables\Columns\TextColumn::make('name')
+                ->description(fn (Product $record): string =>substr($record->description , 0 , 20))
+                ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('price')->money('eur')->sortable(),
+                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable()->searchable(),
+                
 
             ])
             ->filters([
                 //
-                Tables\Filters\SelectFilter::make('category_id')
+                Tables\Filters\SelectFilter::make('Category')
                     ->relationship('category', 'name')
-                    ->label('Category'),
+                    ,
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

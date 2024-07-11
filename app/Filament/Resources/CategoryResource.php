@@ -25,8 +25,9 @@ class CategoryResource extends Resource
         return $form
             ->schema([
                 //
-                    Forms\Components\TextInput::make('name')->required()
-                    ->maxLength(50)
+                    Forms\Components\TextInput::make('name')->required(),
+                    Forms\Components\FileUpload::make('images')->multiple()
+                    
                     
                 
             ]);
@@ -37,8 +38,14 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 //
-                TextColumn::make('name'),
-            TextColumn::make('created_at')->dateTime(),
+                Tables\Columns\ImageColumn::make('image')
+                ->circular()
+                ->stacked(),
+
+                Tables\Columns\TextInputColumn::make('name'),
+
+                Tables\Columns\TextColumn::make('created_at')->dateTime(),
+            
             ])
             ->filters([
                 //
