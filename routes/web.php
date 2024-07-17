@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PanierController;
+use App\Http\Controllers\FavorisController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 
@@ -31,6 +32,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/panier/remove/{panier}', [PanierController::class, 'remove'])->name('panier.remove');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::get('/favoris', [FavorisController::class, 'index'])->name('favoris.favori');
+    Route::get('/favoris/add/{product}', [FavorisController::class, 'ajouter'])->name('favoris.ajouter');
+    Route::delete('/favoris/remove/{favoris}', [FavorisController::class, 'remove'])->name('favoris.remove');
+});
 
 
 require __DIR__.'/auth.php';

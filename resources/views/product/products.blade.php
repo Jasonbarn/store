@@ -8,6 +8,7 @@
 
         <li class="bg-slate-300 p-1 rounded-full">
             <a href="{{route('product.category', $category->id)}}">{{$category->name}}</a>
+            
         </li>
     @endforeach
 

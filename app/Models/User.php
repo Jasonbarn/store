@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Filament\Panel;
+use App\Models\Favoris;
 use App\Models\Commande;
 use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
@@ -71,4 +72,9 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->hasMany(Commande::class);
     }
+
+    public function favoris(): HasMany
+{
+    return $this->hasMany(Favoris::class);
+}
 }

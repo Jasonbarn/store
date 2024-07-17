@@ -11,6 +11,8 @@
             
             <li class= "px-10">Panier</li>
             
+            <li class= "px-10"> <a href="{{ route('favoris.favori') }}">Favoris</li>
+            
     </ul>
     
 </header>
