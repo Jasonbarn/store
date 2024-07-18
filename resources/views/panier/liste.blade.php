@@ -1,9 +1,9 @@
 
-
 @extends('layouts.store')
 
 @section("content")
 <!-- component -->
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 <div class="bg-white">
     <div class="border py-3 px-6">
       <div class="flex justify-between">
@@ -11,7 +11,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
           </svg>
-          <span class="ml-2 font-semibold text-[#252C32]">What a Market</span>
+          <span class="ml-2 font-semibold text-[#252C32]">Jb Market</span>
         </div>
   
         <div class="ml-6 flex flex-1 gap-x-3">
@@ -62,7 +62,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
         </svg>
-        <span class="text-sm font-medium">California</span>
+        <span class="text-sm font-medium">Martinique</span>
         </div>
   
         <div class="flex gap-x-8">
@@ -166,12 +166,15 @@
             			<div class="flex justify-between items-center mt-6 pt-6 border-t"> 
             				<div class="flex items-center">
             					<i class="fa fa-arrow-left text-sm pr-2"></i>
-            					<span class="text-md  font-medium text-blue-700">Continue Shopping</span>
+            					<span class="text-md  font-medium text-blue-700"><a href="{{route('product')}}">Continue Shopping</a></span>
             				</div>
 
             				<div class="flex justify-center items-end">
             					<span class="text-sm font-medium text-gray-400 mr-1">Total:</span>
+                      
             					<span class="text-lg font-bold text-gray-800 ">  {{$total}}</span>
+                      <br>
+                      <a href="" class="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">Commander</a>
             					
             				</div>
             				
@@ -211,7 +214,7 @@
             					</div>
 
             					<div class="flex justify-between items-center mt-3">
-             						
+        
             						<span class="text-xs  text-gray-200">Albert</span>
             						<span class="text-xs  text-gray-200">12/18</span>
             					</div>
@@ -295,12 +298,11 @@
             		
             	</div>
             	
-               
-           </div>
+              
+          </div>
         </div>
     </div>
     </div>
 </div>
 
 @endsection
-

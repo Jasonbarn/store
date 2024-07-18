@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Panier;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -31,4 +32,12 @@ class Product extends Model
         return $this->belongsTo(Panier::class);
     }
 
+    public function favoris(): HasMany
+    {
+        return $this->hasMany(Favoris::class);
+    }
+
+    //**public function isFavorite(){
+        //return $this->hasMany(Favorite::class)
+    //}
 }

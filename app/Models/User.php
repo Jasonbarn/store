@@ -71,4 +71,8 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->hasMany(Commande::class);
     }
+    public function favoris(): HasMany
+    {
+        return $this->hasMany(Favoris::class);
+    }
 }
