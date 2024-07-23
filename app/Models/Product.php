@@ -40,4 +40,5 @@ class Product extends Model
     //**public function isFavorite(){
         //return $this->hasMany(Favorite::class)
     //}
+    
 }

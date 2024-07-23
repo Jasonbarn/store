@@ -11,20 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('commandes', function (Blueprint $table) {
+        Schema::create('commande_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete() ;
-            $table->string('numero',60);
-            $table->float('total') ;
+            $table->foreignId('commande_id')->constrained('commandes') ;
+            $table->foreignId('product_id')->constrained('products') ;
+            $table->integer('quantite') ;
+            $table->decimal('price',10,2);
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('commandes');
+        Schema::dropIfExists('commande_items');
     }
 };

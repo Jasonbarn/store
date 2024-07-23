@@ -11,6 +11,10 @@ height:70vh;
     background-color: aquamarine;
     justify-content:  space-around;
     align-items:  center;
+    background-image: url("image.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
 }
 
 .box{
@@ -27,4 +31,5 @@ height:70vh;
     .container{
         flex-direction: column;
     }
+    
 }

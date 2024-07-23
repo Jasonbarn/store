@@ -13,6 +13,8 @@
             
             <li class= "px-10"> <a href="{{ route('favoris.favori') }}">Favoris</li>
             
+            <li class= "px-10"> <a href="{{ route('commande.lister') }}">commande</li>
+            
     </ul>
     
 </header>
