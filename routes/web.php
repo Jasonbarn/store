@@ -45,4 +45,6 @@ Route::get('/commande/success', [CommandeController::class, 'success'])->name('c
 
 
 });
+
+Route::post('/commande/webhook', [CommandeController::class, 'webhook'])->name('commande.webhook');
 require __DIR__.'/auth.php';

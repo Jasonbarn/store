@@ -124,18 +124,30 @@ public function success (Request $request)
     //dd(info($session)) ;
 
     // info($session ->payment_intent);
-    dd($session) ;
 
-    if($session->payement_status==='paid ' && $session->status==='complete') {
+    if($session->payment_status==='paid' && $session->status==='complete') {
         $commande =Commande::find($session->client_reference_id);
 
         $commande->update(['numero' => $session->payment_intent]);
         $commande->save();
 
-        return 'success';
+        
     }
 
+    return redirect(route('commande.lister'));
 }
 
+public function webhook(Request $request)
+{
+    if($request->object == "checkout.session" && $request->payment_status==='paid' && $request->status==='complete') {
+        $commande =Commande::find($request->client_reference_id);
+
+        $commande->update(['numero' => $request->payment_intent]);
+        $commande->save();
+
+        return 'success';
+}
+
+return "ok";
 
 }
