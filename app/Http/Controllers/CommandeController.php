@@ -137,17 +137,38 @@ public function success (Request $request)
     return redirect(route('commande.lister'));
 }
 
-public function webhook(Request $request)
-{
-    if($request->object == "checkout.session" && $request->payment_status==='paid' && $request->status==='complete') {
-        $commande =Commande::find($request->client_reference_id);
+public function webhook(Request $request) {
+    // dd($request) ;
+   //  eee
+/*
+if($request->type === "payment_intent.succeeded"){
+    $commande =Commande::find(38);
+    $commande->update(['numero' => $request->data["object"]["client_reference_id"]]);
+    $commande->save();
+ }*/
 
-        $commande->update(['numero' => $request->payment_intent]);
-        $commande->save();
 
-        return 'success';
+ /*
+if($request->object == "checkout.session" &&
+     $request->payment_status==='paid ' && 
+      $request->status==='complete') {
+      $commande =Commande::find(38);
+      $commande->update(['numero' => $request->payment_intent]);
+      $commande->save();
+      return 'success';
+  }*/
+
+if($request->type == "checkout.session.completed"){
+    $commande =Commande::find($request->data["object"]["client_reference_id"]);
+
+    $commande->update(['numero' => $request->payment_intent]);
+    $commande->save();
+
+
 }
-
-return "ok";
+return response()->json(['type'=> $request->type, 
+                        'idcommande' =>
+],200); 
+}
 
 }
