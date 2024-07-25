@@ -6,12 +6,12 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class ProductCard extends Component
+class CategoryCard extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct(public $product)
+    public function __construct(public $categorie)//recuperation des données via le constructeur,la variable est publique
     {
         //
         
@@ -22,6 +22,6 @@ class ProductCard extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.product-card');
+        return view('components.category-card');
     }
 }

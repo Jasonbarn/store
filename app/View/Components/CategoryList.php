@@ -3,17 +3,19 @@
 namespace App\View\Components;
 
 use Closure;
-use Illuminate\Contracts\View\View;
+use App\Models\Category;
 use Illuminate\View\Component;
+use Illuminate\Contracts\View\View;
 
-class ProductCard extends Component
+class CategoryList extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct(public $product)
+    public function __construct()
     {
         //
+
         
     }
 
@@ -22,6 +24,8 @@ class ProductCard extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.product-card');
+        $categories = Category::limit(6)->get();
+
+        return view('components.category-list',compact('categories'));
     }
 }

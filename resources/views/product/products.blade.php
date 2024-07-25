@@ -2,8 +2,11 @@
 
 @section('content')
 
+<x-category-list/>
+<x-product-list :product="$products"/>
 
-<ul class= "pt-10 px-3 flex flex-1 gap-4">
+
+{{-- <ul class= "pt-10 px-3 flex flex-1 gap-4">
     @foreach ( $categories as $category )
 
         <li class="bg-slate-300 p-1 rounded-full">
@@ -17,6 +20,4 @@
 <x-product-card :products="$products" />
 <!--pagination -lien de pagination--->
 {{$products->links()}}
-
-
-@endsection
+--}} 

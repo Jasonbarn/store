@@ -96,10 +96,10 @@
 
             				<div class="flex justify-center items-end">
             					<span class="text-sm font-medium text-gray-400 mr-1">Total:</span>
-                      
+                    
             					<span class="text-lg font-bold text-gray-800 ">  {{$total}}</span>
-                      <br>
-                      <a href="{{route('commande.create')}}" class="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">Commander</a>
+                    <br>
+                    <a href="{{route('commande.create')}}" class="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">Commander</a>
             					
             				</div>
             				
@@ -222,9 +222,9 @@
 
             		
             	</div>
-            	
-              
-          </div>
+            
+            
+        </div>
         </div>
     </div>
     </div>
