@@ -11,7 +11,7 @@ class ProductList extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public $product)
+    public function __construct(public $products)
     {
         //
     }

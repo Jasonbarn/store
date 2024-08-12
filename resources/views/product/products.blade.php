@@ -1,23 +1,24 @@
-@extends('layouts.store')
+@extends('layouts.shop')
 
 @section('content')
-
 <x-category-list/>
-<x-product-list :product="$products"/>
+<x-product-list :products="$products"/>
+@php
+    /*
+     <ul class="m-4 flex flex-1 gap-4 justify-center">
+        @foreach ($categories as $category)
+            <li class="categories p-1 rounded-full p-5">
+                <button class="">
+                    <a href="{{route('product.category',$category->id)}}" class="italic">#{{$category->name}}</a>
+                </button>
+            </li>
+        @endforeach
+    </ul>
+    <x-product-card :products="$products" :favs="$favs" />
 
-
-{{-- <ul class= "pt-10 px-3 flex flex-1 gap-4">
-    @foreach ( $categories as $category )
-
-        <li class="bg-slate-300 p-1 rounded-full">
-            <a href="{{route('product.category', $category->id)}}">{{$category->name}}</a>
-        </li>
-    @endforeach
-
-</ul>
-
-
-<x-product-card :products="$products" />
-<!--pagination -lien de pagination--->
-{{$products->links()}}
---}} 
+    {{-- Lien de pagination --}}
+    {{ $products->onEachSide(5)->links() }}
+    */
+@endphp
+   
+@endsection

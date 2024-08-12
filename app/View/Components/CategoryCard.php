@@ -11,7 +11,7 @@ class CategoryCard extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public $categorie)//recuperation des données via le constructeur,la variable est publique
+    public function __construct(public $category)//recuperation des données via le constructeur,la variable est publique
     {
         //
         

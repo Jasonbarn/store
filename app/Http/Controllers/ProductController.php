@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favoris;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -52,12 +53,38 @@ class ProductController extends Controller
         ->inRandomOrder()
         ->limit(5)
         ->get();
-
+        if (isset(auth()->user()->id)) {
+            $fav = Favoris::where('user_id', '=', auth()->user()->id)
+                ->where('product_id', '=', $product->id)
+                ->first();
+            $favs = Favoris::where('user_id', '=', auth()->user()->id)
+                ->get();
+        } else {
+            $fav = null;
+            $favs = null;
+        }
 
         
-        return  view ('product.show',compact('product', 'products'));
+        return  view ('product.show',compact('product', 'products','fav', 'favs'));
         
         
     }
 
+    public function favoris(Product $product)
+    {
+        $fav = Favoris::where('user_id', '=', auth()->user()->id)
+            ->where('product_id', '=', $product->id)
+            ->first();
+
+        if (isset($fav)) {
+            $fav->delete();
+        } else {
+            Favoris::create([
+                'user_id' => auth()->user()->id,
+                'product_id' => $product->id
+            ]);
+        }
+
+        return back();
+    }
 }
